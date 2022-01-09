@@ -1,0 +1,5 @@
+model_config:
+  resnet_unimodal:
+    num_labels: 14
+    losses:
+      - type: weighted_logit_bce

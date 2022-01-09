@@ -1,0 +1,2 @@
+{"id": 00000000, "patient": 100000000, "image": "p10/p100000000/s00000000/image.jpg",  "text": "Your text goes here.", "labels": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+{"id": 00000001, "patient": 110000000, "image": "p11/p110000000/s00000001/image.jpg",  "text": "Your text goes here.", "labels": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}

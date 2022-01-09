@@ -1,0 +1,22 @@
+model_config:
+  text_unimodal:
+    classifier:
+      type: mlp
+      params:
+        batch_norm: False
+        dropout: 0.5
+        hidden_dim: 512
+        in_dim: 2048
+        num_layers: 2
+        out_dim: 14
+    text_embedding:
+      batch_first: true
+      bidirectional: true
+      dropout: 0
+      embedding_size: 200
+      num_hidden: 1024
+      num_layers: 2
+      hidden_size: 1024
+      rnn_type: GRU
+    losses:
+      - type: weighted_logit_bce

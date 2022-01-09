@@ -1,0 +1,37 @@
+includes:
+- ../../datasets/mimic_cxr/bert.yaml
+- ../../models/unimodal/bert.yaml
+
+evaluation:
+  metrics:
+  - multilabel_accuracy
+  - multilabel_macro_f1
+  - multilabel_macro_precision
+  - multilabel_macro_recall
+  - multilabel_micro_f1
+  - multilabel_micro_precision
+  - multilabel_micro_recall
+optimizer:
+  type: adam_w
+  params:
+    lr: 5e-5
+    weight_decay: 1e-2
+
+scheduler:
+  type: warmup_linear
+  params:
+    num_warmup_steps: 2000
+    num_training_steps: ${training.max_updates}
+
+training:
+  batch_size: 128
+  lr_scheduler: true
+  max_epochs: 14
+  early_stop:
+    criteria: mimic_cxr/multilabel_micro_f1
+    minimize: false
+
+checkpoint:
+  max_to_keep: 3
+  pretrained_state_mapping:
+    bert: bert

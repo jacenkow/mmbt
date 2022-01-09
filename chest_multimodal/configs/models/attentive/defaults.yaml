@@ -1,0 +1,33 @@
+model_config:
+  attentive_multimodal:
+    attention:
+      dimension: 2048
+    classifier:
+      type: mlp
+      params:
+        batch_norm: False
+        dropout: 0.5
+        hidden_dim: 512
+        in_dim: 2048
+        num_layers: 2
+        out_dim: 14
+    image_encoder:
+      type: torchvision_resnet
+      params:
+        finetuning: true
+        name: resnet50
+        num_output_features: -1
+        pool_type: avg
+        pretrained: true
+        zero_init_residual: false
+    text_embedding:
+      batch_first: true
+      bidirectional: true
+      dropout: 0
+      embedding_size: 200
+      num_hidden: 1024
+      num_layers: 2
+      hidden_size: 1024
+      rnn_type: GRU
+    losses:
+      - type: weighted_logit_bce

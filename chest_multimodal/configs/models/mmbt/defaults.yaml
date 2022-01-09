@@ -1,0 +1,36 @@
+model_config:
+  chestbert:
+    pretraining: false
+    bert_model_name: bert-base-uncased
+    direct_features_input: false
+    freeze_text: false
+    freeze_modal: false
+    freeze_complete_base: false
+    finetune_lr_multiplier: 1
+    fused_feature_only: false
+    modal_encoder:
+      type: torchvision_resnet
+      params:
+        name: resnet50
+        num_output_features: -1
+        pool_type: avg
+        pretrained: true
+        zero_init_residual: true
+    modal_hidden_size: 2048
+    losses:
+      - type: weighted_logit_bce
+    num_labels: 14
+    text_encoder:
+      type: transformer
+      params:
+        bert_model_name: ${model_config.chestbert.bert_model_name}
+        hidden_size: 768
+        num_attention_heads: 12
+        num_hidden_layers: 12
+        num_segments: 2
+        output_attentions: false
+        output_hidden_states: false
+    text_hidden_size: 768
+    training_head_type: classification
+    use_modal_start_token: true
+    use_modal_end_token: true

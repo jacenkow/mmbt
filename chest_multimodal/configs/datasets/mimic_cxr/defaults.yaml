@@ -1,0 +1,38 @@
+dataset_config:
+  mimic_cxr:
+    data_dir: ${env.data_dir}  # Override if not in `.cache`.
+    data_folder: mimic_cxr
+    use_images: true
+    use_fasttext: true
+    images:
+      train:
+      - mimic_cxr/subjects/
+      val:
+      - mimic_cxr/subjects/
+      test:
+      - mimic_cxr/subjects/
+    annotations:
+      train:
+      - mimic_cxr/annotations/train.jsonl
+      val:
+      - mimic_cxr/annotations/val.jsonl
+      test:
+      - mimic_cxr/annotations/test.jsonl
+    processors:
+      image_processor:
+        type: torchvision_transforms
+        params:
+          transforms:
+            - ToTensor
+            - type: Normalize
+              params:
+                mean: [0.485, 0.485, 0.485]
+                std: [0.286, 0.286, 0.286]
+      text_processor:
+        type: biowordvec
+        params:
+          max_length: 48
+          model_file: mimic_cxr/extra/BioWordVec_PubMed_MIMICIII_d200.bin
+          preprocessor:
+            type: simple_sentence
+            params: {}
